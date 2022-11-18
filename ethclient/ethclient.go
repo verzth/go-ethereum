@@ -455,7 +455,7 @@ func (ec *Client) PendingTransactionCount(ctx context.Context) (uint, error) {
 // case the code is taken from the latest known block. Note that state from very old
 // blocks might not be available.
 func (ec *Client) CallContract(ctx context.Context, msg ethereum.CallMsg, blockNumber *big.Int) ([]byte, error) {
-	var hex hexutil.Bytes
+	hex := new(hexutil.Bytes)
 	err := ec.c.CallContext(ctx, &hex, "eth_call", toCallArg(msg), toBlockNumArg(blockNumber))
 	if err != nil {
 		return nil, err
